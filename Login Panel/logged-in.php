@@ -1,6 +1,8 @@
 <?php
+
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -73,7 +75,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
         <li><a href="">Home</a></li>
         <li><a href="">Link</a></li>
       </ul>
-      <a href="logout.php" id="logout-btn"><button>Logout</button></a>
+      <a href="controller/logout.php" id="logout-btn"><button>Logout</button></a>
     </nav>
 
     <section>

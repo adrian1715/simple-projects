@@ -1,6 +1,8 @@
 <?php
 
-require_once 'config.php';
+require_once '../config/config.php';
+
+session_start();
 
 $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -12,11 +14,6 @@ if ($username && $email && $password) {
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
-    // $stmt->execute([
-    //     ':username' => $username,
-    //     ':email' => $email,
-    //     ':password' => $password
-    // ]);
 
     if ($stmt->rowCount() == 0) { // dados ainda não registrados
         $sql = "INSERT INTO usuarios VALUES (:username, :email, :senha)";
@@ -27,13 +24,12 @@ if ($username && $email && $password) {
             ':senha' => $password
         ));
 
-        session_start();
-        // $_SESSION['alert'] = '<div style="color: green;">Registrado com sucesso!</div>';
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
 
-        header("Location: logged-in.php");
+        header("Location: ../logged-in.php");
     } else {
-        header("Location: http://localhost/Login%20Panel/register.html");
+        $_SESSION['message'] = "<div style='color: #DAA520'>Invalid username or email!</div>";
+        header("Location: ../register-page.php");
     }
 }
