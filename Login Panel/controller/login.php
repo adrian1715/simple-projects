@@ -18,7 +18,6 @@ if ($username && $password) {
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         header("Location: ../logged-in.php");
-        echo "LOGGED IN!";
     }
 }
 $_SESSION['message'] = "<div style='color: red'>Bad credentials!</div>";
